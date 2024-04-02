@@ -6,10 +6,12 @@ import io.micronaut.websocket.WebSocketSession;
 
 // class imports
 import nl.phoneStorageApp.action.LearnAction;
+import nl.phoneStorageApp.action.LoginAction;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({ 
 	@JsonSubTypes.Type(value = LearnAction.class, name = "first"),
+	@JsonSubTypes.Type(value = LoginAction.class, name = "Login"),
 })
 
 public interface Action {
