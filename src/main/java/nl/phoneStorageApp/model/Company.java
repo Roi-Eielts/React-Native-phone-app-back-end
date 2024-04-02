@@ -4,11 +4,9 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import nl.phoneStorageApp.persistance.factories.DAOFactory;
@@ -42,6 +40,10 @@ public class Company {
 		return DAOFactory.getTheFactory().getCompanyDAO().findAll();
 	}
 	
+	public Company merge() {
+		return DAOFactory.getTheFactory().getCompanyDAO().merge(this);
+	}
+
 	
 	public int getId() {
 		return id;

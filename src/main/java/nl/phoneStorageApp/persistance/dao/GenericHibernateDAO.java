@@ -101,6 +101,12 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable> implements
 	
 		return set;
 	}	
+	
+	@Override
+	public T merge(T entity) {
+		getSession().merge(entity);
+		return entity;
+	}
 
 	public void flush() {
 		getSession().flush();

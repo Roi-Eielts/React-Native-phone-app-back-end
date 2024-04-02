@@ -12,5 +12,7 @@ public interface IGenericDAO<T, ID extends Serializable>{
 	public T findById(ID id);
 	
 	public Set<T> findAll();
+	
+	public T merge(T entity);
 
 }
