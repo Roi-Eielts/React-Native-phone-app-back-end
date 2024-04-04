@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import nl.phoneStorageApp.persistance.factories.DAOFactory;
 
 
@@ -22,8 +24,9 @@ public class Product {
 	private String ammount;
 	private String barcode;
 	private TypeOfProduct type;
+	
 	@ManyToOne
-	@JoinColumn(name = "company_id", nullable = false)
+	@JsonBackReference(value = "products")
 	private Company company;
 	
 	

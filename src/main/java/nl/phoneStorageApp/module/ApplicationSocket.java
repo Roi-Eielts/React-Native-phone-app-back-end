@@ -7,6 +7,7 @@ import io.micronaut.websocket.annotation.OnClose;
 import io.micronaut.websocket.annotation.OnMessage;
 import io.micronaut.websocket.annotation.OnOpen;
 import io.micronaut.websocket.annotation.ServerWebSocket;
+import nl.phoneStorageApp.Inteceptor.Hibernate;
 import nl.phoneStorageApp.session.SessionManager;
 
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ public class ApplicationSocket {
 		LOG.info(String.format("[%s] started the connection ", session.getId()));
 	}
 	
+	@Hibernate
 	@OnMessage(maxPayloadLength = 1000000)
 	public void onMessage(String message, WebSocketSession session) {
 		Action action;

@@ -8,7 +8,6 @@ import jakarta.inject.Singleton;
 import nl.phoneStorageApp.model.ApplicationFacade;
 import nl.phoneStorageApp.module.Action;
 import nl.phoneStorageApp.persistance.utils.HibernateSessionManager;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

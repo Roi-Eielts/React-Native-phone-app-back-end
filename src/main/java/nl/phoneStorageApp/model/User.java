@@ -13,11 +13,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import nl.phoneStorageApp.persistance.factories.DAOFactory;
 
 @Entity
 @Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = "email") })
-public class User {
+public class User implements Comparable<User> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,31 +31,10 @@ public class User {
 	private String username;
 	@Column(name = "password", nullable = false)
 	private String password;
+	
 	@ManyToOne
-	@JoinColumn(name = "company_id", nullable = false)
+	@JsonBackReference(value = "users")
 	private Company company;
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, username);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		return Objects.equals(id, other.id) && Objects.equals(username, other.username);
-	}
 
 	public User findById() {
 		return DAOFactory.getTheFactory().getUserDAO().findById(this.id);
@@ -109,6 +90,11 @@ public class User {
 
 	public void setCompany(Company company) {
 		this.company = company;
+	}
+
+	@Override
+	public int compareTo(User o) {
+		return username.compareTo(o.getUsername());
 	}
 
 }
