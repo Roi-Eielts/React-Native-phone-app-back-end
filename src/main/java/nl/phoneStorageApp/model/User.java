@@ -31,10 +31,21 @@ public class User implements Comparable<User> {
 	private String username;
 	@Column(name = "password", nullable = false)
 	private String password;
-	
+
 	@ManyToOne
 	@JsonBackReference(value = "users")
 	private Company company;
+
+	public boolean verify() {
+		try {
+			User user = DAOFactory.getTheFactory().getUserDAO().getByUsername(this.username);
+			if (Password.verifyPassword(this.password, user.getPassword())) {
+				return true;
+			}
+		} catch (Exception e) {
+		}
+		return false;
+	}
 
 	public User findById() {
 		return DAOFactory.getTheFactory().getUserDAO().findById(this.id);

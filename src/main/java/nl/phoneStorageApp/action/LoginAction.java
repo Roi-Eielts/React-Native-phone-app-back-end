@@ -9,12 +9,13 @@ import nl.phoneStorageApp.module.Action;
 
 public class LoginAction implements Action{
 	private User user;
+	private boolean success;
 
 	@Override
 	public void execute(WebSocketSession session) {
 		User fullUser = ApplicationFacade.getInstance().findUserByUsername(user.getUsername());
-		System.out.println(user);
-		System.out.println(fullUser);
+		success = fullUser.verify();
+	    session.sendAsync(this);
 	}
 
 	public User getUser() {
@@ -23,5 +24,13 @@ public class LoginAction implements Action{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public boolean getSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
 	}
 }

@@ -57,6 +57,16 @@ public class Company {
 		}
 		return null;
 	}
+	
+	public User findUserByEmail(String email) {
+		for (User a : getUsers()) {
+			if (a.getEmail().equalsIgnoreCase(email)) {
+				return a;
+			}
+		}
+		return null;
+	}
+	
 
 	public int getId() {
 		return id;
