@@ -24,7 +24,7 @@ public class ApplicationSocket {
 	}
 	
 	@Hibernate
-	@OnMessage(maxPayloadLength = 1000000)
+	@OnMessage(maxPayloadLength = 20000000)
 	public void onMessage(String message, WebSocketSession session) {
 		Action action;
 		try {

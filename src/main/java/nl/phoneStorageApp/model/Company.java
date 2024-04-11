@@ -1,5 +1,6 @@
 package nl.phoneStorageApp.model;
 
+import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 
@@ -49,18 +50,13 @@ public class Company {
 		return DAOFactory.getTheFactory().getCompanyDAO().merge(this);
 	}
 
+	public List<Product> getCompanyProducts() {
+		
+		return DAOFactory.getTheFactory().getProductDAO().getProductsByCompany(this.id);
+	}
 	public User findUserByUsername(String username) {
 		for (User a : getUsers()) {
 			if (a.getUsername().equalsIgnoreCase(username)) {
-				return a;
-			}
-		}
-		return null;
-	}
-	
-	public User findUserByEmail(String email) {
-		for (User a : getUsers()) {
-			if (a.getEmail().equalsIgnoreCase(email)) {
 				return a;
 			}
 		}

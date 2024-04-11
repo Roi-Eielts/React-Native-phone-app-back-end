@@ -14,7 +14,12 @@ public class LoginAction implements Action{
 	@Override
 	public void execute(WebSocketSession session) {
 		User fullUser = ApplicationFacade.getInstance().findUserByUsername(user.getUsername());
-		success = fullUser.verify();
+		if(fullUser == null) {
+			success = false;
+			session.sendAsync(this);
+			return;
+		}
+		success = user.verify(fullUser);
 	    session.sendAsync(this);
 	}
 

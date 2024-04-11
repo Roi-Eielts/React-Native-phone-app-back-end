@@ -37,8 +37,11 @@ public class Application {
 			
 			user.setCompany(comp);
 			user.setEmail("test@mail");
+			
+			//username: admin
+			//password: admin
 			user.setUsername("admin");
-			user.setPassword("sha1:64000:18:4TdQQu9vaKx66vkbE/w+ZLdR3jqf9ha2:FdLm6AgFHMxt0LyO0k6PJS0I");
+			user.setPassword("sha1:64000:18:OIzybzCqF4f5+1hmR7Ypboq4Y/oKer+w:nQFCJv02ApsuEo6ieSjagWHF");
 			DAOFactory.getTheFactory().getUserDAO().saveOrUpdate(user);
 			
 			HibernateSessionManager.getSessionFactory().getCurrentSession().getTransaction().commit();

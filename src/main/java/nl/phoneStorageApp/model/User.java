@@ -36,9 +36,8 @@ public class User implements Comparable<User> {
 	@JsonBackReference(value = "users")
 	private Company company;
 
-	public boolean verify() {
+	public boolean verify(User user) {
 		try {
-			User user = DAOFactory.getTheFactory().getUserDAO().getByUsername(this.username);
 			if (Password.verifyPassword(this.password, user.getPassword())) {
 				return true;
 			}

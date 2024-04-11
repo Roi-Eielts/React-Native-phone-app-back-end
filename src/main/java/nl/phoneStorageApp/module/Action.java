@@ -11,7 +11,9 @@ import nl.phoneStorageApp.action.LoginAction;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({ 
 	@JsonSubTypes.Type(value = LearnAction.class, name = "first"),
-	@JsonSubTypes.Type(value = LoginAction.class, name = "Login"),
+	@JsonSubTypes.Type(value = LoginAction.class, name = "LOGIN"),
+	@JsonSubTypes.Type(value = LoginAction.class, name = "GET_PRODUCTS"),
+
 })
 
 public interface Action {
