@@ -34,7 +34,6 @@ public class Application {
 			//create company
 			comp.setName("first Company");
 			DAOFactory.getTheFactory().getCompanyDAO().saveOrUpdate(comp);
-			
 			user.setCompany(comp);
 			user.setEmail("test@mail");
 			

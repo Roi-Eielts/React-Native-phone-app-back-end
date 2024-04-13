@@ -20,6 +20,8 @@ public class LoginAction implements Action{
 			return;
 		}
 		success = user.verify(fullUser);
+		if(success)
+			user = fullUser;
 	    session.sendAsync(this);
 	}
 
