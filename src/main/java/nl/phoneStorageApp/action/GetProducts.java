@@ -12,14 +12,12 @@ import nl.phoneStorageApp.module.Action;
 public class GetProducts implements Action{
 	
 	private User user;
-	private Company company;
-	private List<Product> products;
+	private Set<Product> products;
 
 	@Override
 	public void execute(WebSocketSession session) {
 		user = user.findById();
-		company = company.findById(user.getCompany().getId());
-		products = company.getCompanyProducts();
+		products = user.getCompany().getProduct();
 		session.sendAsync(this);
 	}
 
@@ -31,19 +29,19 @@ public class GetProducts implements Action{
 		this.user = user;
 	}
 
-	public Company getCompany() {
-		return company;
-	}
+//	public Company getCompany() {
+//		return company;
+//	}
+//
+//	public void setCompany(Company company) {
+//		this.company = company;
+//	}
 
-	public void setCompany(Company company) {
-		this.company = company;
-	}
-
-	public List<Product> getProducts() {
+	public Set<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(List<Product> products) {
+	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
 

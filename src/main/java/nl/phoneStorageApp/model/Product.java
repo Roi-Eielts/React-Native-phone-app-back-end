@@ -1,5 +1,6 @@
 package nl.phoneStorageApp.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -8,14 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import nl.phoneStorageApp.persistance.factories.DAOFactory;
 
 
 @Entity
-public class Product {
+@Table(name = "product")
+public class Product implements Comparable<Product>, Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +29,9 @@ public class Product {
 	private String barcode;
 	private TypeOfProduct type;
 	
+	@JsonIgnore
 	@ManyToOne
-	@JsonBackReference(value = "products")
+	@JoinColumn(name = "company_id")
 	private Company company;
 	
 	
@@ -77,10 +82,17 @@ public class Product {
 	public void setType(TypeOfProduct type) {
 		this.type = type;
 	}
+	@JsonIgnore
 	public Company getCompany() {
 		return company;
 	}
+
 	public void setCompany(Company company) {
 		this.company = company;
+	}
+
+	@Override
+	public int compareTo(Product o) {
+		return name.compareTo(o.getName());
 	}	
 }

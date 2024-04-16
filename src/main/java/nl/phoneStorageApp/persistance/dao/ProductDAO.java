@@ -2,10 +2,11 @@ package nl.phoneStorageApp.persistance.dao;
 
 import java.util.List;
 
-import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+
+import org.hibernate.query.Query;
 
 import nl.phoneStorageApp.model.Product;
 import nl.phoneStorageApp.persistance.interfaces.IProductDAO;
@@ -16,16 +17,12 @@ public class ProductDAO extends GenericHibernateDAO<Product, Integer> implements
 	@Override
 	public List<Product> getProductsByCompany(int id) {
 		CriteriaBuilder builder = getSession().getCriteriaBuilder();
-		CriteriaQuery<Product> criteria = builder.createQuery(getPersistentClass());
-		Root<Product> root = criteria.from(getPersistentClass());
-		criteria.where(builder.equal(root.get("company_id"), id));
-		List<Product> products = null;
-		try {
-			products = (List<Product>) getSession().createQuery(criteria);
-		} catch (NoResultException e) {
-			return null;
-		}
-		return products;
+		CriteriaQuery<Product> criteriaQ = builder.createQuery(getPersistentClass());
+		Root<Product> root = criteriaQ.from(getPersistentClass());
+		criteriaQ.select(root).where(builder.equal(root.get("company"), id));
+		Query<Product> q = getSession().createQuery(criteriaQ);
+
+		return q.list();
 	}
 
 

@@ -1,34 +1,34 @@
 package nl.phoneStorageApp.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import nl.phoneStorageApp.persistance.factories.DAOFactory;
 
 @Entity
-public class Company {
+@Table(name = "company")
+public class Company implements Comparable<Company>, Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-
+ 
 	@OneToMany(mappedBy = "company")
-	@JsonManagedReference(value = "users")
-	private SortedSet<User> users;
+	private Set<User> users;
 
+	
 	@OneToMany(mappedBy = "company")
-	@JsonManagedReference(value = "products")
-	private SortedSet<Product> product;
+	private Set<Product> product;
 
 	public void save() {
 		DAOFactory.getTheFactory().getCompanyDAO().saveOrUpdate(this);
@@ -38,6 +38,10 @@ public class Company {
 		DAOFactory.getTheFactory().getCompanyDAO().delete(this);
 	}
 
+	public Company findById() {
+		return DAOFactory.getTheFactory().getCompanyDAO().findById(this.id);
+	}
+	
 	public Company findById(int id) {
 		return DAOFactory.getTheFactory().getCompanyDAO().findById(id);
 	}
@@ -50,13 +54,16 @@ public class Company {
 		return DAOFactory.getTheFactory().getCompanyDAO().merge(this);
 	}
 
+	@JsonIgnore
 	public List<Product> getCompanyProducts() {
-		
-		return DAOFactory.getTheFactory().getProductDAO().getProductsByCompany(this.id);
+		return DAOFactory.getTheFactory().getProductDAO().getProductsByCompany(this.id)
+;
 	}
+	
 	public User findUserByUsername(String username) {
 		for (User a : getUsers()) {
 			if (a.getUsername().equalsIgnoreCase(username)) {
+				System.out.println(a);
 				return a;
 			}
 		}
@@ -80,11 +87,11 @@ public class Company {
 		this.name = name;
 	}
 
-	public SortedSet<User> getUsers() {
+	public Set<User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(SortedSet<User> users) {
+	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
 
@@ -92,12 +99,17 @@ public class Company {
 		this.users.add(user);
 	}
 
-	public SortedSet<Product> getProduct() {
+	public Set<Product> getProduct() {
 		return product;
 	}
 
-	public void setProduct(SortedSet<Product> product) {
+	public void setProduct(Set<Product> product) {
 		this.product = product;
+	}
+
+	@Override
+	public int compareTo(Company o) {
+		return name.compareTo(o.getName());
 	}
 
 }

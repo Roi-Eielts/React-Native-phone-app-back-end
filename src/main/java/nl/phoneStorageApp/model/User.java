@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import nl.phoneStorageApp.persistance.factories.DAOFactory;
 
@@ -33,7 +34,8 @@ public class User implements Comparable<User> {
 	private String password;
 
 	@ManyToOne
-	@JsonBackReference(value = "users")
+	@JoinColumn(name = "companyId")
+	@JsonIgnore
 	private Company company;
 
 	public boolean verify(User user) {
