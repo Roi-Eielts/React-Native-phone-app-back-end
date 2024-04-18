@@ -29,14 +29,6 @@ public class GetProducts implements Action{
 		this.user = user;
 	}
 
-//	public Company getCompany() {
-//		return company;
-//	}
-//
-//	public void setCompany(Company company) {
-//		this.company = company;
-//	}
-
 	public Set<Product> getProducts() {
 		return products;
 	}
