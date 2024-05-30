@@ -25,7 +25,8 @@ public class Product implements Comparable<Product>, Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private String ammount;
+	private int quantity;
+	private String contents;
 	private String barcode;
 	private TypeOfProduct type;
 	
@@ -64,11 +65,11 @@ public class Product implements Comparable<Product>, Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAmmount() {
-		return ammount;
+	public String getcontents() {
+		return contents;
 	}
-	public void setAmmount(String ammount) {
-		this.ammount = ammount;
+	public void setcontents(String contents) {
+		this.contents = contents;
 	}
 	public String getBarcode() {
 		return barcode;
@@ -94,5 +95,13 @@ public class Product implements Comparable<Product>, Serializable {
 	@Override
 	public int compareTo(Product o) {
 		return name.compareTo(o.getName());
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}	
 }

@@ -8,6 +8,7 @@ import nl.phoneStorageApp.action.GetCompanyAllProducts;
 import nl.phoneStorageApp.action.GetProducts;
 // class imports
 import nl.phoneStorageApp.action.LearnAction;
+import nl.phoneStorageApp.action.LoadProduct;
 import nl.phoneStorageApp.action.LoginAction;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
@@ -17,6 +18,7 @@ import nl.phoneStorageApp.action.LoginAction;
 	@JsonSubTypes.Type(value = GetProducts.class, name = "GET_PRODUCTS"),
 	@JsonSubTypes.Type(value = CreateProduct.class, name = "CREATE_PRODUCT"),
 	@JsonSubTypes.Type(value = GetCompanyAllProducts.class, name = "GET_ALL_COMPANY_PRODUCTS"),
+	@JsonSubTypes.Type(value = LoadProduct.class, name = "LOAD_PRODUCT"),
 })
 
 public interface Action {
