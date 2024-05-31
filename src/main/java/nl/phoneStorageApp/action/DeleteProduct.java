@@ -1,0 +1,25 @@
+package nl.phoneStorageApp.action;
+
+import io.micronaut.websocket.WebSocketSession;
+import nl.phoneStorageApp.model.Product;
+import nl.phoneStorageApp.module.Action;
+
+public class DeleteProduct implements Action {
+	Product product;
+
+	@Override
+	public void execute(WebSocketSession session) {
+		product = product.findByid();
+		product.delete();
+		session.sendAsync(this);
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
+}

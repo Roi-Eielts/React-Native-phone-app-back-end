@@ -63,7 +63,6 @@ public class Company implements Comparable<Company>, Serializable{
 	public User findUserByUsername(String username) {
 		for (User a : getUsers()) {
 			if (a.getUsername().equalsIgnoreCase(username)) {
-				System.out.println(a);
 				return a;
 			}
 		}

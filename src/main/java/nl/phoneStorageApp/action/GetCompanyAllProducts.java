@@ -13,7 +13,6 @@ public class GetCompanyAllProducts implements Action {
 	Set<Product> products;
 	@Override
 	public void execute(WebSocketSession session) {
-		System.out.println(user.getId());
 		user = user.findById();
 		Company comp = user.getCompany();
 		products = comp.getProduct();
