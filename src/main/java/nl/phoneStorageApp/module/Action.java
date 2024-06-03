@@ -10,7 +10,9 @@ import nl.phoneStorageApp.action.GetProducts;
 // class imports
 import nl.phoneStorageApp.action.LearnAction;
 import nl.phoneStorageApp.action.LoadProduct;
+import nl.phoneStorageApp.action.LoadProductToEdit;
 import nl.phoneStorageApp.action.LoginAction;
+import nl.phoneStorageApp.action.SaveProduct;
 import nl.phoneStorageApp.action.SaveProductQuantity;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
@@ -23,7 +25,8 @@ import nl.phoneStorageApp.action.SaveProductQuantity;
 	@JsonSubTypes.Type(value = LoadProduct.class, name = "LOAD_PRODUCT"),
 	@JsonSubTypes.Type(value = SaveProductQuantity.class, name = "SAVE_QUANTITY"),
 	@JsonSubTypes.Type(value = DeleteProduct.class, name = "DELETE_PRODUCT"),
-
+	@JsonSubTypes.Type(value = LoadProductToEdit.class, name = "LOAD_PRODUCT_TO_EDIT"),
+	@JsonSubTypes.Type(value = SaveProduct.class, name = "SAVE_PRODUCT"),
 })
 
 public interface Action {
