@@ -10,7 +10,6 @@ public class LoadProductToEdit implements Action {
 	@Override
 	public void execute(WebSocketSession session) {
 		product = product.findByid();
-		System.out.println(product.getType());
 		session.sendAsync(this);
 	}
 

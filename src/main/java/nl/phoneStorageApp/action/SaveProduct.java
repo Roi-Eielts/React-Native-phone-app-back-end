@@ -13,6 +13,8 @@ public class SaveProduct implements Action{
 
 	@Override
 	public void execute(WebSocketSession session) {
+		Product oldProduct = product.findByid();
+		product.setCompany(oldProduct.getCompany());
 		product.save();
 		session.sendAsync(this);
 	}
