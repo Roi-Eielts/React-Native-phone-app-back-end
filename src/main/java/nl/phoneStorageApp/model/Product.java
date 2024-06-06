@@ -48,8 +48,8 @@ public class Product implements Comparable<Product>, Serializable {
 		DAOFactory.getTheFactory().getProductDAO().delete(this);
 	}
 
-	public Set<User> findAll() {
-		return DAOFactory.getTheFactory().getUserDAO().findAll();
+	public Set<Product> findAll() {
+		return DAOFactory.getTheFactory().getProductDAO().findAll();
 	}
 	
 	// get and setters

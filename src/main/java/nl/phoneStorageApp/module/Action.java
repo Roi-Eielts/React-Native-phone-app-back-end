@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.micronaut.websocket.WebSocketSession;
 import nl.phoneStorageApp.action.CreateProduct;
 import nl.phoneStorageApp.action.DeleteProduct;
+import nl.phoneStorageApp.action.FindProductByBarcode;
 import nl.phoneStorageApp.action.GetCompanyAllProducts;
 import nl.phoneStorageApp.action.GetProducts;
 // class imports
@@ -27,6 +28,8 @@ import nl.phoneStorageApp.action.SaveProductQuantity;
 	@JsonSubTypes.Type(value = DeleteProduct.class, name = "DELETE_PRODUCT"),
 	@JsonSubTypes.Type(value = LoadProductToEdit.class, name = "LOAD_PRODUCT_TO_EDIT"),
 	@JsonSubTypes.Type(value = SaveProduct.class, name = "SAVE_PRODUCT"),
+	@JsonSubTypes.Type(value = FindProductByBarcode.class, name = "FINDBYBARCODE"),
+
 })
 
 public interface Action {
